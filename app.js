@@ -88,6 +88,7 @@ function createImgGalleryMarkup(galleryItems) {
 function openModalByClick(e) {
   modal.addEventListener('click', closeModalByClick)
   window.addEventListener('keydown', closeModalByKey)
+  window.addEventListener('keydown', sliderImgByKey)
 
   e.preventDefault()
 
@@ -126,5 +127,23 @@ function closeModalByClick(e) {
     toggleModal(modal)
 
     modal.removeEventListener('click', closeModalByClick)
+  }
+}
+
+function sliderImgByKey(e) {
+  if (e.code === 'ArrowLeft') {
+    const index = galleryItems.findIndex(item => item.original === modalImg.src)
+    for (let i = index - 1; i > -1; i -= 1) {
+      const nextImgSrc = galleryItems[index - 1].original
+      modalImg.src = nextImgSrc
+    }
+  }
+
+  if (e.code === 'ArrowRight') {
+    const index = galleryItems.findIndex(item => item.original === modalImg.src)
+    for (let i = index + 1; i < galleryItems.length; i += 1) {
+      const nextImgSrc = galleryItems[index + 1].original
+      modalImg.src = nextImgSrc
+    }
   }
 }
