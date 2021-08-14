@@ -110,10 +110,7 @@ function insertImgInModal(e) {
 
 function closeModalByKey(e) {
   if (e.code === 'Escape') {
-    modalImg.src = ''
-    modalImg.alt = ''
-
-    toggleModal(modal)
+    closeModal()
 
     window.removeEventListener('keydown', closeModalByKey)
   }
@@ -121,13 +118,17 @@ function closeModalByKey(e) {
 
 function closeModalByClick(e) {
   if (e.target.classList.contains('lightbox__button') || e.target.classList.contains('lightbox__overlay')) {
-    modalImg.src = ''
-    modalImg.alt = ''
-
-    toggleModal(modal)
+    closeModal()
 
     modal.removeEventListener('click', closeModalByClick)
   }
+}
+
+function closeModal() {
+  modalImg.src = ''
+  modalImg.alt = ''
+
+  toggleModal(modal)
 }
 
 function sliderImgByKey(e) {
